@@ -823,6 +823,30 @@ window.addEventListener('keydown', e => {
 
 console.log('%cNEXUS Particle Engine X — Loaded ✓', 'color:#00ffe7;font-size:14px;font-weight:bold');
 console.log('Keyboard: Space/→ next shape, ← prev, E explode, G gravity, C color');
+// ── MOBILE TOUCH SUPPORT ──
+window.addEventListener('touchmove', (e) => {
+  e.preventDefault();
+  const touch = e.touches[0];
+  const x = (touch.clientX / innerWidth  - 0.5) * 42;
+  const y = (touch.clientY / innerHeight - 0.5) * -32;
+  hand1.x = x;
+  hand1.y = y;
+  hand1.active = true;
+  handDot.style.display = 'block';
+  handDot.style.left = touch.clientX + 'px';
+  handDot.style.top  = touch.clientY + 'px';
+}, { passive: false });
+
+window.addEventListener('touchend', () => {
+  hand1.active = false;
+  handDot.style.display = 'none';
+});
+
+window.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 2) {
+    triggerExplosion(); // two finger tap = explosion
+  }
+});
 </script>
 </body>
 </html>
