@@ -278,7 +278,7 @@
     <div class="shape-idx" id="shape-idx">01 / 10</div>
     <div class="stat-row">
       <span>Particles</span>
-      <span class="stat-val">25,000</span>
+      <span class="stat-val">6,000</span>
     </div>
     <div class="stat-row">
       <span>FPS</span>
@@ -296,14 +296,14 @@
   </div>
 </div>
 
-<div id="particle-counter">25,000 PARTICLES<br>WebGL Instanced</div>
+<div id="particle-counter">6,000 PARTICLES<br>WebGL Instanced</div>
 
 <script>
 // ═══════════════════════════════════════════════
 //  NEXUS PARTICLE ENGINE X  —  Level 10
 // ═══════════════════════════════════════════════
 
-const PARTICLE_COUNT = 25000;
+const PARTICLE_COUNT = 6000;
 const LERP_SPEED = 0.055;
 
 // ── SCENE SETUP ──
@@ -315,7 +315,7 @@ camera.position.z = 40;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
 renderer.setSize(innerWidth, innerHeight);
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setPixelRatio(1); // capped at 1 for performance
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.2;
 document.body.appendChild(renderer.domElement);
@@ -331,7 +331,7 @@ const vertexShader = `
     vColor = color;
     vAlpha = alpha;
     vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-    gl_PointSize = size * (350.0 / -mvPosition.z);
+    gl_PointSize = size * (600.0 / -mvPosition.z);
     gl_Position = projectionMatrix * mvPosition;
   }
 `;
@@ -364,7 +364,7 @@ for (let i = 0; i < PARTICLE_COUNT; i++) {
   positions[ix+1] = (Math.random() - 0.5) * 120;
   positions[ix+2] = (Math.random() - 0.5) * 120;
   colors[ix] = 0.0; colors[ix+1] = 1.0; colors[ix+2] = 0.9;
-  sizes[i]  = Math.random() * 1.2 + 0.3;
+  sizes[i]  = Math.random() * 2.0 + 1.0;
   alphas[i] = Math.random() * 0.6 + 0.4;
 }
 
