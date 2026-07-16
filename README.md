@@ -1,4 +1,4 @@
-# ✋ NEXUS — Interactive Particle Engine X
+# Interactive Particle Engine X
 
 An interactive 3D particle visualization controlled by **real-time hand tracking**.  
 Built with a custom **GLSL shader pipeline**, **MediaPipe Hands**, and **Three.js WebGL rendering**.
